@@ -2,11 +2,6 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-    'tsserver',
-    'eslint',
-})
-
 local cmp = require('cmp')
 
 lsp.set_preferences({
@@ -17,6 +12,21 @@ lsp.set_preferences({
         hint = 'H',
         info = 'I'
     }
+})
+
+local lsp_zero = require("lsp-zero")
+lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_keymaps({bufnr=bufnr})
+end)
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    ensure_installed = {'tsserver', 'rust_analyzer', 'lua_ls'},
+    handlers = {
+        function(server_name)
+            require('lspconfig')[server_name].setup({})
+        end,
+    },
 })
 
 require('lspconfig')['glslls'].setup{

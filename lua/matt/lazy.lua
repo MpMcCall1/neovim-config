@@ -7,7 +7,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
     lazypath,
-    d
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -25,7 +24,7 @@ plugins = {
           'neovim/nvim-lspconfig',
           'williamboman/mason.nvim',
           'williamboman/mason-lspconfig.nvim',
-          {'hrsh7th/nvim-cmp', commit = 'b356f2c', pin=true,},
+          'hrsh7th/nvim-cmp',
           'hrsh7th/cmp-buffer',
           'hrsh7th/cmp-path',
           'hrsh7th/cmp-nvim-lsp',
